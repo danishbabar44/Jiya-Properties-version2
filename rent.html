@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Properties - Jiya Properties Dubai</title>
+    <meta name="description" content="Find rental properties in Dubai with Jiya Properties. Flexible rental solutions and comprehensive tenant services.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html">
+                        <i class="fas fa-building"></i>
+                        <span>Jiya Properties</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="properties.html" class="nav-link">Properties</a></li>
+                    <li><a href="buy.html" class="nav-link">Buy</a></li>
+                    <li><a href="sell.html" class="nav-link">Sell</a></li>
+                    <li><a href="rent.html" class="nav-link active">Rent</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="contact.html" class="btn btn-primary">Get Free Valuation</a>
+                </div>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Rent Properties</span>
+                </div>
+                <h1>Rental Properties in Dubai</h1>
+                <p>Find your perfect rental home with flexible terms and comprehensive support</p>
+            </div>
+        </section>
+
+        <!-- Rental Search -->
+        <section class="rental-search">
+            <div class="container">
+                <div class="search-header">
+                    <h2>Find Your Perfect Rental</h2>
+                    <p>Search from our extensive portfolio of rental properties</p>
+                </div>
+                <div class="rental-search-form">
+                    <div class="search-row">
+                        <div class="search-field">
+                            <label>Location</label>
+                            <select id="rental-location">
+                                <option value="">All Locations</option>
+                                <option value="Dubai Marina">Dubai Marina</option>
+                                <option value="Downtown Dubai">Downtown Dubai</option>
+                                <option value="Business Bay">Business Bay</option>
+                                <option value="Arabian Ranches">Arabian Ranches</option>
+                                <option value="DIFC">DIFC</option>
+                            </select>
+                        </div>
+                        <div class="search-field">
+                            <label>Property Type</label>
+                            <select id="rental-type">
+                                <option value="">All Types</option>
+                                <option value="Villa">Villa</option>
+                                <option value="Apartment">Apartment</option>
+                                <option value="Townhouse">Townhouse</option>
+                                <option value="Penthouse">Penthouse</option>
+                                <option value="Studio">Studio</option>
+                            </select>
+                        </div>
+                        <div class="search-field">
+                            <label>Bedrooms</label>
+                            <select id="rental-bedrooms">
+                                <option value="">Any</option>
+                                <option value="0">Studio</option>
+                                <option value="1">1 Bedroom</option>
+                                <option value="2">2 Bedrooms</option>
+                                <option value="3">3 Bedrooms</option>
+                                <option value="4">4+ Bedrooms</option>
+                            </select>
+                        </div>
+                        <div class="search-field">
+                            <label>Budget (AED/Year)</label>
+                            <select id="rental-budget">
+                                <option value="">Any Budget</option>
+                                <option value="0-50000">Up to 50K</option>
+                                <option value="50000-100000">50K - 100K</option>
+                                <option value="100000-200000">100K - 200K</option>
+                                <option value="200000-500000">200K - 500K</option>
+                                <option value="500000+">500K+</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary search-rentals-btn">Search Rentals</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Rentals -->
+        <section class="featured-rentals">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Rental Properties</h2>
+                    <p>Premium rental properties available now</p>
+                </div>
+                <div class="rentals-grid">
+                    <div class="rental-card">
+                        <div class="rental-image">
+                            <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=400&h=300" alt="Luxury Apartment">
+                            <div class="rental-badge">Available Now</div>
+                        </div>
+                        <div class="rental-info">
+                            <h3>Luxury 2BR Apartment</h3>
+                            <p class="rental-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Dubai Marina
+                            </p>
+                            <div class="rental-specs">
+                                <span><i class="fas fa-bed"></i> 2 Beds</span>
+                                <span><i class="fas fa-bath"></i> 2 Baths</span>
+                                <span><i class="fas fa-ruler-combined"></i> 1,200 sq ft</span>
+                            </div>
+                            <div class="rental-price">
+                                <span class="price">85,000 AED/year</span>
+                                <span class="price-monthly">7,083 AED/month</span>
+                            </div>
+                            <div class="rental-features">
+                                <span class="feature">Furnished</span>
+                                <span class="feature">Pool</span>
+                                <span class="feature">Gym</span>
+                                <span class="feature">Parking</span>
+                            </div>
+                            <div class="rental-actions">
+                                <button class="btn btn-primary">View Details</button>
+                                <button class="btn btn-secondary">Schedule Viewing</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rental-card">
+                        <div class="rental-image">
+                            <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=400&h=300" alt="Family Villa">
+                            <div class="rental-badge">Available Now</div>
+                        </div>
+                        <div class="rental-info">
+                            <h3>Spacious Family Villa</h3>
+                            <p class="rental-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Arabian Ranches
+                            </p>
+                            <div class="rental-specs">
+                                <span><i class="fas fa-bed"></i> 4 Beds</span>
+                                <span><i class="fas fa-bath"></i> 3 Baths</span>
+                                <span><i class="fas fa-ruler-combined"></i> 2,800 sq ft</span>
+                            </div>
+                            <div class="rental-price">
+                                <span class="price">180,000 AED/year</span>
+                                <span class="price-monthly">15,000 AED/month</span>
+                            </div>
+                            <div class="rental-features">
+                                <span class="feature">Garden</span>
+                                <span class="feature">Garage</span>
+                                <span class="feature">Community Pool</span>
+                                <span class="feature">Playground</span>
+                            </div>
+                            <div class="rental-actions">
+                                <button class="btn btn-primary">View Details</button>
+                                <button class="btn btn-secondary">Schedule Viewing</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rental-card">
+                        <div class="rental-image">
+                            <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=300" alt="Modern Studio">
+                            <div class="rental-badge">Available Now</div>
+                        </div>
+                        <div class="rental-info">
+                            <h3>Modern Studio Apartment</h3>
+                            <p class="rental-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Business Bay
+                            </p>
+                            <div class="rental-specs">
+                                <span><i class="fas fa-bed"></i> Studio</span>
+                                <span><i class="fas fa-bath"></i> 1 Bath</span>
+                                <span><i class="fas fa-ruler-combined"></i> 600 sq ft</span>
+                            </div>
+                            <div class="rental-price">
+                                <span class="price">45,000 AED/year</span>
+                                <span class="price-monthly">3,750 AED/month</span>
+                            </div>
+                            <div class="rental-features">
+                                <span class="feature">Furnished</span>
+                                <span class="feature">Balcony</span>
+                                <span class="feature">Metro Access</span>
+                                <span class="feature">24/7 Security</span>
+                            </div>
+                            <div class="rental-actions">
+                                <button class="btn btn-primary">View Details</button>
+                                <button class="btn btn-secondary">Schedule Viewing</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-cta">
+                    <a href="properties.html" class="btn btn-primary">View All Rentals</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rental Services -->
+        <section class="rental-services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Comprehensive Rental Services</h2>
+                    <p>Full-service rental solutions for tenants and landlords</p>
+                </div>
+                <div class="services-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" onclick="showTab('tenants')">For Tenants</button>
+                        <button class="tab-btn" onclick="showTab('landlords')">For Landlords</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="tenants-tab">
+                        <div class="services-grid">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <h3>Property Search</h3>
+                                <p>Personalized property search based on your requirements and budget</p>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <h3>Viewing Coordination</h3>
+                                <p>Flexible viewing schedules to fit your busy lifestyle</p>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-file-contract"></i>
+                                </div>
+                                <h3>Lease Negotiation</h3>
+                                <p>Professional negotiation to secure favorable lease terms</p>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-key"></i>
+                                </div>
+                                <h3>Move-in Support</h3>
+                                <p>Complete assistance with move-in process and documentation</p>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h3>Maintenance Support</h3>
+                                <p>24/7 maintenance support throughout your tenancy</p>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h3>Tenant Protection</h3>
+                                <p>Legal support and tenant rights protection</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="landlords-tab">
+                        <div class="services-grid">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3>Tenant Screening</h3>
+                                <p>Comprehensive background checks and financial verification</p>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                                <h3>Property Marketing</h3>
+                                <p>Professional photography and multi-channel marketing</p>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <h3>Rent Collection</h3>
+                                <p>Automated rent collection and financial reporting</p>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-wrench"></i>
+                                </div>
+                                <h3>Property Maintenance</h3>
+                                <p>Regular maintenance and emergency repair coordination</p>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Performance Reports</h3>
+                                <p>Regular property performance and market analysis reports</p>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fas fa-gavel"></i>
+                                </div>
+                                <h3>Legal Compliance</h3>
+                                <p>Ensuring all legal requirements and regulations are met</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rental Process -->
+        <section class="rental-process">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Simple Rental Process</h2>
+                    <p>Easy steps to find and secure your rental property</p>
+                </div>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Search & Browse</h3>
+                        <p>Browse our extensive portfolio of rental properties or let us search for you based on your criteria.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>View Properties</h3>
+                        <p>Schedule viewings for properties that interest you. We offer flexible viewing times including evenings and weekends.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Application</h3>
+                        <p>Submit your rental application with required documents. We'll handle the paperwork and communicate with landlords.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Lease Signing</h3>
+                        <p>Review and sign the lease agreement. We ensure all terms are fair and clearly explained.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h3>Move In</h3>
+                        <p>Complete the move-in process with property inspection and key handover. We're here to support you every step.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rental Requirements -->
+        <section class="rental-requirements">
+            <div class="container">
+                <div class="requirements-content">
+                    <div class="requirements-text">
+                        <h2>Rental Requirements & Documentation</h2>
+                        <p>Understanding the requirements helps streamline your rental application process.</p>
+                        
+                        <div class="requirements-section">
+                            <h3>Required Documents</h3>
+                            <ul class="requirements-list">
+                                <li><i class="fas fa-check"></i> Emirates ID (for UAE residents)</li>
+                                <li><i class="fas fa-check"></i> Passport and Visa (for expatriates)</li>
+                                <li><i class="fas fa-check"></i> Salary Certificate or Employment Letter</li>
+                                <li><i class="fas fa-check"></i> Bank Statements (last 3 months)</li>
+                                <li><i class="fas fa-check"></i> Security Deposit (typically 5-10% of annual rent)</li>
+                                <li><i class="fas fa-check"></i> Real Estate Commission (typically 5%)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="requirements-section">
+                            <h3>Payment Methods</h3>
+                            <ul class="requirements-list">
+                                <li><i class="fas fa-check"></i> Annual payment (most common)</li>
+                                <li><i class="fas fa-check"></i> Semi-annual payments (2 cheques)</li>
+                                <li><i class="fas fa-check"></i> Quarterly payments (4 cheques)</li>
+                                <li><i class="fas fa-check"></i> Monthly payments (12 cheques - limited options)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="requirements-image">
+                        <img src="https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=500&h=400" alt="Documentation">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Areas -->
+        <section class="popular-areas">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Popular Rental Areas in Dubai</h2>
+                    <p>Discover the most sought-after neighborhoods for rental properties</p>
+                </div>
+                <div class="areas-grid">
+                    <div class="area-card">
+                        <div class="area-image">
+                            <img src="https://images.pexels.com/photos/2506988/pexels-photo-2506988.jpeg?auto=compress&cs=tinysrgb&w=400&h=250" alt="Dubai Marina">
+                        </div>
+                        <div class="area-content">
+                            <h3>Dubai Marina</h3>
+                            <p>Waterfront living with stunning views, restaurants, and entertainment options.</p>
+                            <div class="area-stats">
+                                <span>Average Rent: 70K - 150K AED</span>
+                                <span>Properties Available: 120+</span>
+                            </div>
+                            <a href="properties.html?location=Dubai Marina" class="btn btn-secondary">View Properties</a>
+                        </div>
+                    </div>
+                    <div class="area-card">
+                        <div class="area-image">
+                            <img src="https://images.pexels.com/photos/2506988/pexels-photo-2506988.jpeg?auto=compress&cs=tinysrgb&w=400&h=250" alt="Downtown Dubai">
+                        </div>
+                        <div class="area-content">
+                            <h3>Downtown Dubai</h3>
+                            <p>Heart of the city with iconic landmarks, shopping, and business districts.</p>
+                            <div class="area-stats">
+                                <span>Average Rent: 80K - 200K AED</span>
+                                <span>Properties Available: 95+</span>
+                            </div>
+                            <a href="properties.html?location=Downtown Dubai" class="btn btn-secondary">View Properties</a>
+                        </div>
+                    </div>
+                    <div class="area-card">
+                        <div class="area-image">
+                            <img src="https://images.pexels.com/photos/2506988/pexels-photo-2506988.jpeg?auto=compress&cs=tinysrgb&w=400&h=250" alt="Business Bay">
+                        </div>
+                        <div class="area-content">
+                            <h3>Business Bay</h3>
+                            <p>Modern business district with excellent connectivity and amenities.</p>
+                            <div class="area-stats">
+                                <span>Average Rent: 60K - 120K AED</span>
+                                <span>Properties Available: 85+</span>
+                            </div>
+                            <a href="properties.html?location=Business Bay" class="btn btn-secondary">View Properties</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Find Your Perfect Rental?</h2>
+                    <p>Let our rental experts help you find the ideal property that meets your needs and budget.</p>
+                    <div class="cta-buttons">
+                        <a href="properties.html" class="btn btn-primary">Browse Rentals</a>
+                        <a href="contact.html" class="btn btn-secondary">Get Rental Assistance</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-building"></i>
+                        <span>Jiya Properties</span>
+                    </div>
+                    <p>Best Real Estate Agency in Dubai UAE</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="properties.html">Properties</a></li>
+                        <li><a href="buy.html">Buy</a></li>
+                        <li><a href="sell.html">Sell</a></li>
+                        <li><a href="rent.html">Rent</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="buy.html">Property Buying</a></li>
+                        <li><a href="sell.html">Property Selling</a></li>
+                        <li><a href="rent.html">Property Rental</a></li>
+                        <li><a href="contact.html">Property Valuation</a></li>
+                        <li><a href="about.html">Investment Advisory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Dubai, UAE</p>
+                        <p><i class="fas fa-phone"></i> +971 50 123 4567</p>
+                        <p><i class="fas fa-envelope"></i> info@jiyaproperties.ae</p>
+                        <p><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Jiya Properties. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties - Jiya Properties Dubai</title>
+    <meta name="description" content="Browse our extensive portfolio of luxury properties in Dubai. Find your perfect home or investment opportunity.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html">
+                        <i class="fas fa-building"></i>
+                        <span>Jiya Properties</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="properties.html" class="nav-link active">Properties</a></li>
+                    <li><a href="buy.html" class="nav-link">Buy</a></li>
+                    <li><a href="sell.html" class="nav-link">Sell</a></li>
+                    <li><a href="rent.html" class="nav-link">Rent</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="contact.html" class="btn btn-primary">Get Free Valuation</a>
+                </div>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Properties</span>
+                </div>
+                <h1>Property Listings</h1>
+                <p>Discover luxury properties in Dubai's most prestigious locations</p>
+            </div>
+        </section>
+
+        <!-- Properties Section -->
+        <section class="properties-listing">
+            <div class="container">
+                <div class="properties-content">
+                    <!-- Filters Sidebar -->
+                    <aside class="filters-sidebar">
+                        <div class="filters-header">
+                            <h3>Filter Properties</h3>
+                            <button class="filter-clear" onclick="clearFilters()">Clear All</button>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4>Location</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" value="Dubai Marina" name="location">
+                                    <span>Dubai Marina</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="Downtown Dubai" name="location">
+                                    <span>Downtown Dubai</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="Business Bay" name="location">
+                                    <span>Business Bay</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="Arabian Ranches" name="location">
+                                    <span>Arabian Ranches</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="DIFC" name="location">
+                                    <span>DIFC</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Property Type</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" value="Villa" name="type">
+                                    <span>Villa</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="Apartment" name="type">
+                                    <span>Apartment</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="Townhouse" name="type">
+                                    <span>Townhouse</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="Penthouse" name="type">
+                                    <span>Penthouse</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="Commercial" name="type">
+                                    <span>Commercial</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Price Range</h4>
+                            <div class="price-range-filter">
+                                <input type="range" id="properties-price-range" min="500000" max="5000000" step="50000">
+                                <div class="price-labels">
+                                    <span>500K AED</span>
+                                    <span id="properties-price-display">5M+ AED</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Bedrooms</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" value="0" name="bedrooms">
+                                    <span>Studio</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="1" name="bedrooms">
+                                    <span>1 Bedroom</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="2" name="bedrooms">
+                                    <span>2 Bedrooms</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="3" name="bedrooms">
+                                    <span>3 Bedrooms</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" value="4" name="bedrooms">
+                                    <span>4+ Bedrooms</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary filter-apply" onclick="applyFilters()">Apply Filters</button>
+                    </aside>
+
+                    <!-- Properties Grid -->
+                    <div class="properties-main">
+                        <div class="properties-controls">
+                            <div class="results-count">
+                                <span id="results-count">6 Properties Found</span>
+                            </div>
+                            <div class="view-controls">
+                                <button class="view-btn active" onclick="setView('grid')">
+                                    <i class="fas fa-th-large"></i>
+                                </button>
+                                <button class="view-btn" onclick="setView('list')">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                            <div class="sort-controls">
+                                <select id="sort-properties">
+                                    <option value="price-desc">Price: High to Low</option>
+                                    <option value="price-asc">Price: Low to High</option>
+                                    <option value="date-desc">Newest First</option>
+                                    <option value="size-desc">Size: Largest First</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="properties-grid grid-view" id="properties-list">
+                            <!-- Properties will be populated by JavaScript -->
+                        </div>
+
+                        <div class="pagination">
+                            <button class="pagination-btn" onclick="changePage(-1)">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="pagination-info">Page 1 of 1</span>
+                            <button class="pagination-btn" onclick="changePage(1)">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-building"></i>
+                        <span>Jiya Properties</span>
+                    </div>
+                    <p>Best Real Estate Agency in Dubai UAE</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="properties.html">Properties</a></li>
+                        <li><a href="buy.html">Buy</a></li>
+                        <li><a href="sell.html">Sell</a></li>
+                        <li><a href="rent.html">Rent</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="buy.html">Property Buying</a></li>
+                        <li><a href="sell.html">Property Selling</a></li>
+                        <li><a href="rent.html">Property Rental</a></li>
+                        <li><a href="contact.html">Property Valuation</a></li>
+                        <li><a href="about.html">Investment Advisory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Dubai, UAE</p>
+                        <p><i class="fas fa-phone"></i> +971 50 123 4567</p>
+                        <p><i class="fas fa-envelope"></i> info@jiyaproperties.ae</p>
+                        <p><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Jiya Properties. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script src="properties.js"></script>
+</body>
+</html>

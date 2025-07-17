@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Jiya Properties Dubai</title>
+    <meta name="description" content="Get in touch with Jiya Properties for all your real estate needs in Dubai. Professional consultations and property services available.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html">
+                        <i class="fas fa-building"></i>
+                        <span>Jiya Properties</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="properties.html" class="nav-link">Properties</a></li>
+                    <li><a href="buy.html" class="nav-link">Buy</a></li>
+                    <li><a href="sell.html" class="nav-link">Sell</a></li>
+                    <li><a href="rent.html" class="nav-link">Rent</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="contact.html" class="btn btn-primary">Get Free Valuation</a>
+                </div>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Contact Us</span>
+                </div>
+                <h1>Contact Us</h1>
+                <p>Get in touch with Dubai's leading real estate experts</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h2>Get in Touch</h2>
+                        <p>Ready to find your dream property or need expert real estate advice? Our team is here to help you every step of the way.</p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h3>Office Address</h3>
+                                    <p>Dubai Marina<br>Dubai, UAE</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h3>Phone Number</h3>
+                                    <p>+971 50 123 4567</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h3>Email Address</h3>
+                                    <p>info@jiyaproperties.ae</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h3>WhatsApp</h3>
+                                    <p>+971 50 123 4567</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="office-hours">
+                            <h3>Office Hours</h3>
+                            <div class="hours-list">
+                                <div class="hours-item">
+                                    <span>Monday - Friday</span>
+                                    <span>9:00 AM - 6:00 PM</span>
+                                </div>
+                                <div class="hours-item">
+                                    <span>Saturday</span>
+                                    <span>9:00 AM - 4:00 PM</span>
+                                </div>
+                                <div class="hours-item">
+                                    <span>Sunday</span>
+                                    <span>Closed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-section">
+                        <form class="contact-form" id="contact-form">
+                            <h2>Send us a Message</h2>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="contact-name">Full Name *</label>
+                                    <input type="text" id="contact-name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-email">Email Address *</label>
+                                    <input type="email" id="contact-email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-phone">Phone Number *</label>
+                                    <input type="tel" id="contact-phone" name="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-service">Service Required</label>
+                                    <select id="contact-service" name="service">
+                                        <option value="">Select a service</option>
+                                        <option value="buy">Buy Property</option>
+                                        <option value="sell">Sell Property</option>
+                                        <option value="rent">Rent Property</option>
+                                        <option value="valuation">Property Valuation</option>
+                                        <option value="investment">Investment Advisory</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-budget">Budget Range (AED)</label>
+                                <select id="contact-budget" name="budget">
+                                    <option value="">Select budget range</option>
+                                    <option value="500k-1m">500K - 1M</option>
+                                    <option value="1m-2m">1M - 2M</option>
+                                    <option value="2m-5m">2M - 5M</option>
+                                    <option value="5m+">5M+</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Message *</label>
+                                <textarea id="contact-message" name="message" rows="5" placeholder="Tell us about your requirements..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="container">
+                <h2>Find Our Office</h2>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Dubai Marina Office</h3>
+                        <p>Click to view directions on Google Maps</p>
+                        <button class="btn btn-primary">Get Directions</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <div class="container">
+                <h2>Quick Actions</h2>
+                <div class="actions-grid">
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Property Valuation</h3>
+                        <p>Get a free, accurate valuation of your property</p>
+                        <button class="btn btn-secondary" onclick="openValuationForm()">Get Valuation</button>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Schedule Consultation</h3>
+                        <p>Book a free consultation with our experts</p>
+                        <button class="btn btn-secondary" onclick="openConsultationForm()">Book Now</button>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Request Callback</h3>
+                        <p>We'll call you back at your convenience</p>
+                        <button class="btn btn-secondary" onclick="openCallbackForm()">Request Call</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Valuation Modal -->
+    <div class="modal" id="valuation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Property Valuation Request</h3>
+                <button class="modal-close" onclick="closeValuationForm()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="valuation-form">
+                <div class="form-group">
+                    <label for="valuation-name">Full Name</label>
+                    <input type="text" id="valuation-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="valuation-email">Email Address</label>
+                    <input type="email" id="valuation-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="valuation-phone">Phone Number</label>
+                    <input type="tel" id="valuation-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="valuation-property-type">Property Type</label>
+                    <select id="valuation-property-type">
+                        <option value="">Select property type</option>
+                        <option value="villa">Villa</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="townhouse">Townhouse</option>
+                        <option value="penthouse">Penthouse</option>
+                        <option value="commercial">Commercial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="valuation-location">Location</label>
+                    <input type="text" id="valuation-location" placeholder="Enter property location">
+                </div>
+                <div class="form-group">
+                    <label for="valuation-details">Property Details</label>
+                    <textarea id="valuation-details" rows="3" placeholder="Bedrooms, bathrooms, size, etc."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Request Valuation</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Consultation Modal -->
+    <div class="modal" id="consultation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Schedule Consultation</h3>
+                <button class="modal-close" onclick="closeConsultationForm()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="consultation-form">
+                <div class="form-group">
+                    <label for="consultation-name">Full Name</label>
+                    <input type="text" id="consultation-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="consultation-email">Email Address</label>
+                    <input type="email" id="consultation-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="consultation-phone">Phone Number</label>
+                    <input type="tel" id="consultation-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="consultation-date">Preferred Date</label>
+                    <input type="date" id="consultation-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="consultation-time">Preferred Time</label>
+                    <select id="consultation-time">
+                        <option value="">Select time</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="consultation-topic">Consultation Topic</label>
+                    <textarea id="consultation-topic" rows="3" placeholder="What would you like to discuss?"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Schedule Consultation</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Callback Modal -->
+    <div class="modal" id="callback-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Request Callback</h3>
+                <button class="modal-close" onclick="closeCallbackForm()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="callback-form">
+                <div class="form-group">
+                    <label for="callback-name">Full Name</label>
+                    <input type="text" id="callback-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="callback-phone">Phone Number</label>
+                    <input type="tel" id="callback-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="callback-time">Preferred Call Time</label>
+                    <select id="callback-time">
+                        <option value="">Select preferred time</option>
+                        <option value="morning">Morning (9 AM - 12 PM)</option>
+                        <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                        <option value="evening">Evening (5 PM - 8 PM)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="callback-purpose">Purpose of Call</label>
+                    <select id="callback-purpose">
+                        <option value="">Select purpose</option>
+                        <option value="buy">Buy Property</option>
+                        <option value="sell">Sell Property</option>
+                        <option value="rent">Rent Property</option>
+                        <option value="valuation">Property Valuation</option>
+                        <option value="investment">Investment Advice</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Request Callback</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-building"></i>
+                        <span>Jiya Properties</span>
+                    </div>
+                    <p>Best Real Estate Agency in Dubai UAE</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="properties.html">Properties</a></li>
+                        <li><a href="buy.html">Buy</a></li>
+                        <li><a href="sell.html">Sell</a></li>
+                        <li><a href="rent.html">Rent</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="buy.html">Property Buying</a></li>
+                        <li><a href="sell.html">Property Selling</a></li>
+                        <li><a href="rent.html">Property Rental</a></li>
+                        <li><a href="contact.html">Property Valuation</a></li>
+                        <li><a href="about.html">Investment Advisory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Dubai, UAE</p>
+                        <p><i class="fas fa-phone"></i> +971 50 123 4567</p>
+                        <p><i class="fas fa-envelope"></i> info@jiyaproperties.ae</p>
+                        <p><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Jiya Properties. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>
