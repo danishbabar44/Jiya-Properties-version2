@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Building, Search, MapPin, Bed, Bath, Square, Phone, MessageCircle, ChevronUp, Menu, X, User, Heart, Home, Info, Briefcase, Mail, ArrowRight, ChevronDown } from 'lucide-react';
+import { Building, Search, MapPin, Bed, Bath, Square, Phone, MessageCircle, ChevronUp, Menu, X, User, Heart, Home, Info, Briefcase, Mail, ArrowRight, ChevronDown, Star, Award, Shield, Clock, TrendingUp, Users, CheckCircle } from 'lucide-react';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState('buy');
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [counters, setCounters] = useState({
+    experience: 0,
+    clients: 0,
+    properties: 0,
+    satisfaction: 0
+  });
 
   // Handle scroll events
   useEffect(() => {
@@ -16,6 +22,44 @@ function App() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Counter animation effect
+  useEffect(() => {
+    const animateCounters = () => {
+      const targets = {
+        experience: 15,
+        clients: 5000,
+        properties: 500,
+        satisfaction: 98
+      };
+      
+      const duration = 2000;
+      const steps = 60;
+      const stepTime = duration / steps;
+      
+      Object.keys(targets).forEach(key => {
+        const target = targets[key];
+        const increment = target / steps;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          setCounters(prev => ({
+            ...prev,
+            [key]: Math.floor(current)
+          }));
+        }, stepTime);
+      });
+    };
+
+    // Trigger animation after component mounts
+    const timer = setTimeout(animateCounters, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   // Properties data
@@ -256,39 +300,45 @@ function App() {
       {/* Trust Indicators Section */}
       <section className="py-12 bg-gray-100">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Jiya Properties</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Trusted expertise and proven results in Dubai's real estate market</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mb-4">
-                <Building className="h-8 w-8 text-white" />
+                <TrendingUp className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold mb-2">15+ Years Experience</h3>
+              <h3 className="text-3xl font-bold mb-2 text-teal-600">{counters.experience}+</h3>
+              <h4 className="text-xl font-semibold mb-2">Years Experience</h4>
               <p className="text-gray-600">Trusted expertise in Dubai's real estate market</p>
             </div>
             
             <div className="flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mb-4">
-                <User className="h-8 w-8 text-white" />
+                <Users className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold mb-2">5000+ Happy Clients</h3>
+              <h3 className="text-3xl font-bold mb-2 text-teal-600">{counters.clients.toLocaleString()}+</h3>
+              <h4 className="text-xl font-semibold mb-2">Happy Clients</h4>
               <p className="text-gray-600">Satisfied customers across the UAE</p>
             </div>
             
             <div className="flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                </svg>
+                <Building className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold mb-2">Award Winning Agency</h3>
-              <p className="text-gray-600">Recognized for excellence in real estate</p>
+              <h3 className="text-3xl font-bold mb-2 text-teal-600">{counters.properties}+</h3>
+              <h4 className="text-xl font-semibold mb-2">Properties Sold</h4>
+              <p className="text-gray-600">Successful transactions completed</p>
             </div>
             
             <div className="flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mb-4">
-                <Phone className="h-8 w-8 text-white" />
+                <Star className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold mb-2">24/7 Support</h3>
-              <p className="text-gray-600">Always available to assist you</p>
+              <h3 className="text-3xl font-bold mb-2 text-teal-600">{counters.satisfaction}%</h3>
+              <h4 className="text-xl font-semibold mb-2">Client Satisfaction</h4>
+              <p className="text-gray-600">Consistently high satisfaction ratings</p>
             </div>
           </div>
         </div>
@@ -383,9 +433,7 @@ function App() {
             
             <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
+                <MapPin className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-3">Rent Property</h3>
               <p className="text-gray-600 mb-4">Discover the perfect rental in prime locations with flexible terms and comprehensive support.</p>
@@ -396,9 +444,7 @@ function App() {
             
             <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <TrendingUp className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-3">Sell Property</h3>
               <p className="text-gray-600 mb-4">Maximize your property value with our expert marketing, competitive pricing, and proven sales strategies.</p>
@@ -421,17 +467,128 @@ function App() {
         </div>
       </section>
 
+      {/* Market Insights Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Dubai Market Insights</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Stay informed with the latest market trends and investment opportunities in Dubai's dynamic real estate sector</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                  <TrendingUp className="h-6 w-6 text-green-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">Market Growth</h3>
+                  <p className="text-green-600 font-semibold">+12.5% YoY</p>
+                </div>
+              </div>
+              <p className="text-gray-600">Dubai's property market continues to show strong growth with increasing demand from international investors and residents.</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                  <Building className="h-6 w-6 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">New Developments</h3>
+                  <p className="text-blue-600 font-semibold">50+ Projects</p>
+                </div>
+              </div>
+              <p className="text-gray-600">Exciting new developments launching across Dubai, offering modern amenities and prime locations for investors.</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mr-4">
+                  <Star className="h-6 w-6 text-teal-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">Investment ROI</h3>
+                  <p className="text-teal-600 font-semibold">8.2% Average</p>
+                </div>
+              </div>
+              <p className="text-gray-600">Strong rental yields and capital appreciation make Dubai an attractive destination for property investment.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 bg-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Hear from our satisfied clients about their experience with Jiya Properties</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-600 mb-4 italic">"Jiya Properties helped us find our dream home in Dubai Marina. Their team was professional, knowledgeable, and made the entire process seamless."</p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                <div>
+                  <h4 className="font-semibold">Sarah Al-Mahmoud</h4>
+                  <p className="text-gray-500 text-sm">Property Buyer</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-600 mb-4 italic">"Excellent service and market knowledge. They sold my property above asking price within just 3 weeks. Highly recommended!"</p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                <div>
+                  <h4 className="font-semibold">Ahmed Hassan</h4>
+                  <p className="text-gray-500 text-sm">Property Seller</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-600 mb-4 italic">"As a first-time investor in Dubai, Jiya Properties provided invaluable guidance and helped me make informed decisions."</p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                <div>
+                  <h4 className="font-semibold">Maria Rodriguez</h4>
+                  <p className="text-gray-500 text-sm">Property Investor</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 bg-teal-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Looking to sell, buy, or rent a property in Dubai?</h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">We're here to help you find the perfect home or investment opportunity.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Make Your Next Move?</h2>
+          <p className="text-xl mb-8 max-w-3xl mx-auto">Whether you're buying, selling, or renting, our expert team is here to guide you every step of the way.</p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <a href="#" className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-3 rounded-md font-medium transition-colors">
               List Your Property
             </a>
             <a href="#" className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-3 rounded-md font-medium transition-colors">
-              Get in Touch
+              Schedule Consultation
             </a>
           </div>
         </div>
