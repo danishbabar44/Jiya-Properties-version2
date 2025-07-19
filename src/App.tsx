@@ -17,6 +17,9 @@ function App() {
     properties: 0,
     satisfaction: 0
   });
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [favoriteProperties, setFavoriteProperties] = useState(new Set());
 
   // Handle scroll events
   useEffect(() => {
@@ -75,6 +78,22 @@ function App() {
 
     // Trigger animation after component mounts
     const timer = setTimeout(animateCounters, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Testimonial carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial(prev => (prev + 1) % 3);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Loading simulation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -152,6 +171,35 @@ function App() {
     console.log('Search results:', filteredResults);
     // In a real app, this would update the properties display
   };
+
+  // Toggle favorite
+  const toggleFavorite = (propertyId) => {
+    setFavoriteProperties(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(propertyId)) {
+        newFavorites.delete(propertyId);
+      } else {
+        newFavorites.add(propertyId);
+      }
+      return newFavorites;
+    });
+  };
+
+  // Loading screen
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="flex items-center">
+            <Building className="text-teal-600 h-8 w-8 mr-2" />
+            <span className="text-xl font-semibold text-black">Jiya Properties</span>
+          </div>
+          <p className="text-gray-600 mt-2">Loading your dream properties...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -423,7 +471,11 @@ function App() {
                   </div>
                   <div className="absolute top-4 left-4 flex space-x-2">
                     <button className="bg-white bg-opacity-90 p-2 rounded-full hover:bg-opacity-100 transition-all">
-                      <Heart className="h-4 w-4 text-gray-600 hover:text-red-500" />
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFavorite(property.id);
+                      }}
+                      <Heart className={`h-4 w-4 transition-colors ${favoriteProperties.has(property.id) ? 'text-red-500 fill-current' : 'text-gray-600 hover:text-red-500'}`} />
                     </button>
                     <button className="bg-white bg-opacity-90 p-2 rounded-full hover:bg-opacity-100 transition-all">
                       <Share2 className="h-4 w-4 text-gray-600 hover:text-teal-600" />
@@ -599,53 +651,293 @@ function App() {
             <p className="text-gray-600 max-w-2xl mx-auto">Hear from our satisfied clients about their experience with Jiya Properties</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
+          <div className="relative max-w-4xl mx-auto">
+            <div className="overflow-hidden rounded-lg">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
+              >
+                <div className="w-full flex-shrink-0 px-4">
+                  <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <div className="flex justify-center mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-gray-600 mb-6 italic text-lg">"Jiya Properties helped us find our dream home in Dubai Marina. Their team was professional, knowledgeable, and made the entire process seamless."</p>
+                    <div className="flex items-center justify-center">
+                      <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full mr-4 flex items-center justify-center">
+                        <span className="text-white font-semibold text-lg">SA</span>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg">Sarah Al-Mahmoud</h4>
+                        <p className="text-gray-500">Property Buyer</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="w-full flex-shrink-0 px-4">
+                  <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <div className="flex justify-center mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-gray-600 mb-6 italic text-lg">"Excellent service and market knowledge. They sold my property above asking price within just 3 weeks. Highly recommended!"</p>
+                    <div className="flex items-center justify-center">
+                      <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full mr-4 flex items-center justify-center">
+                        <span className="text-white font-semibold text-lg">AH</span>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg">Ahmed Hassan</h4>
+                        <p className="text-gray-500">Property Seller</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="w-full flex-shrink-0 px-4">
+                  <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <div className="flex justify-center mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-gray-600 mb-6 italic text-lg">"As a first-time investor in Dubai, Jiya Properties provided invaluable guidance and helped me make informed decisions."</p>
+                    <div className="flex items-center justify-center">
+                      <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full mr-4 flex items-center justify-center">
+                        <span className="text-white font-semibold text-lg">MR</span>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg">Maria Rodriguez</h4>
+                        <p className="text-gray-500">Property Investor</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p className="text-gray-600 mb-4 italic">"Jiya Properties helped us find our dream home in Dubai Marina. Their team was professional, knowledgeable, and made the entire process seamless."</p>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                <div>
-                  <h4 className="font-semibold">Sarah Al-Mahmoud</h4>
-                  <p className="text-gray-500 text-sm">Property Buyer</p>
+            </div>
+            
+            {/* Testimonial Navigation */}
+            <div className="flex justify-center mt-8 space-x-2">
+              {[0, 1, 2].map((index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTestimonial(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    currentTestimonial === index ? 'bg-teal-600 scale-125' : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-16 bg-teal-600 text-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay Updated with Dubai's Property Market</h2>
+            <p className="text-xl mb-8 opacity-90">Get the latest market insights, new property listings, and exclusive investment opportunities delivered to your inbox.</p>
+            
+            <div className="max-w-md mx-auto">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <input 
+                  type="email" 
+                  placeholder="Enter your email address" 
+                  className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+                />
+                <button className="bg-navy hover:bg-opacity-90 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
+                  Subscribe
+                </button>
+              </div>
+              <p className="text-sm mt-4 opacity-75">No spam, unsubscribe at any time. We respect your privacy.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="h-6 w-6" />
+                </div>
+                <h3 className="font-semibold mb-2">Market Reports</h3>
+                <p className="text-sm opacity-90">Weekly market analysis and trends</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Building className="h-6 w-6" />
+                </div>
+                <h3 className="font-semibold mb-2">New Listings</h3>
+                <p className="text-sm opacity-90">First access to premium properties</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Star className="h-6 w-6" />
+                </div>
+                <h3 className="font-semibold mb-2">Exclusive Deals</h3>
+                <p className="text-sm opacity-90">Special offers for subscribers</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Awards & Recognition Section */}
+      <section className="py-16 animate-on-scroll">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Awards & Recognition</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Recognized for excellence in Dubai's real estate industry</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Award className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Best Real Estate Agency</h3>
+                <p className="text-gray-600 text-sm mb-2">Dubai Property Awards 2023</p>
+                <div className="flex justify-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                  ))}
                 </div>
               </div>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-600 mb-4 italic">"Excellent service and market knowledge. They sold my property above asking price within just 3 weeks. Highly recommended!"</p>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                <div>
-                  <h4 className="font-semibold">Ahmed Hassan</h4>
-                  <p className="text-gray-500 text-sm">Property Seller</p>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Excellence in Customer Service</h3>
+                <p className="text-gray-600 text-sm mb-2">UAE Business Excellence Awards</p>
+                <div className="flex justify-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                  ))}
                 </div>
               </div>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-600 mb-4 italic">"As a first-time investor in Dubai, Jiya Properties provided invaluable guidance and helped me make informed decisions."</p>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                <div>
-                  <h4 className="font-semibold">Maria Rodriguez</h4>
-                  <p className="text-gray-500 text-sm">Property Investor</p>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Building className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Top Luxury Property Dealer</h3>
+                <p className="text-gray-600 text-sm mb-2">Middle East Property Awards</p>
+                <div className="flex justify-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                  ))}
                 </div>
               </div>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">RERA Certified Agency</h3>
+                <p className="text-gray-600 text-sm mb-2">Dubai Real Estate Regulatory Agency</p>
+                <div className="flex justify-center">
+                  <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">
+                    CERTIFIED
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-gray-100 animate-on-scroll">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Get answers to common questions about buying, selling, and renting properties in Dubai</p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-lg font-bold mb-3 text-teal-600">What are the costs involved in buying property in Dubai?</h3>
+                <p className="text-gray-600">Typical costs include 4% DLD transfer fee, 2% agent commission, mortgage registration fees, and legal fees. We provide detailed cost breakdowns for all our clients.</p>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-lg font-bold mb-3 text-teal-600">Can foreigners buy property in Dubai?</h3>
+                <p className="text-gray-600">Yes, foreigners can buy freehold properties in designated areas of Dubai. We guide international buyers through the entire process and legal requirements.</p>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-lg font-bold mb-3 text-teal-600">How long does the buying process take?</h3>
+                <p className="text-gray-600">Typically 2-4 weeks from offer acceptance to completion, depending on mortgage approval and legal procedures. We ensure a smooth and efficient process.</p>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-lg font-bold mb-3 text-teal-600">What rental yields can I expect?</h3>
+                <p className="text-gray-600">Dubai offers attractive rental yields of 6-8% annually, depending on location and property type. We provide detailed ROI analysis for investment properties.</p>
+              </div>
+            </div>
+            
+            <div className="text-center mt-8">
+              <button className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
+                View All FAQs
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA Section */}
+      <section className="py-16 bg-navy text-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Property Journey?</h2>
+            <p className="text-xl mb-8 opacity-90">Our expert team is here to guide you through every step of your real estate journey in Dubai.</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Phone className="h-8 w-8" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Call Us</h3>
+                <p className="opacity-90">+971 50 123 4567</p>
+                <p className="text-sm opacity-75">Available 24/7</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MessageCircle className="h-8 w-8" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">WhatsApp</h3>
+                <p className="opacity-90">Quick Response</p>
+                <p className="text-sm opacity-75">Instant property updates</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Mail className="h-8 w-8" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Email Us</h3>
+                <p className="opacity-90">info@jiyaproperties.ae</p>
+                <p className="text-sm opacity-75">Detailed consultations</p>
+              </div>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+              <button className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
+                Schedule Free Consultation
+              </button>
+              <button className="bg-white text-navy hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
+                Download Property Guide
+              </button>
             </div>
           </div>
         </div>
@@ -768,11 +1060,14 @@ function App() {
       {/* WhatsApp Floating Button */}
       <a 
         href="#" 
-        className="fixed bottom-24 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110"
+        className="fixed bottom-24 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110 animate-bounce-gentle"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
+        <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
+          <span className="text-white text-xs font-bold">!</span>
+        </div>
       </a>
 
       {/* Back to Top Button */}
