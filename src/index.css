@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* CSS Custom Properties for McCone Properties Color Palette */
+:root {
+  --primary-color: #00A19C;      /* Teal - primary brand color */
+  --secondary-color: #1A2B4C;    /* Dark Navy - text/secondary */
+  --background-white: #FFFFFF;
+  --background-light: #F5F5F5;   /* Section backgrounds */
+  --text-dark: #333333;          /* Body text */
+  --accent-gold: #FFD700;        /* Awards/highlights */
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -9,10 +22,39 @@
   
   body {
     font-family: 'Poppins', 'Inter', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--background-white);
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold text-gray-800;
+    @apply font-semibold;
+    color: var(--text-dark);
+  }
+
+  /* Responsive Typography with clamp() */
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    line-height: 1.3;
+  }
+
+  h4 {
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    line-height: 1.4;
+  }
+
+  p {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    line-height: 1.6;
   }
 }
 
@@ -22,10 +64,204 @@
   }
   
   .btn-primary {
-    @apply bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition-colors;
+    background-color: var(--primary-color);
+    @apply hover:opacity-90 text-white px-4 py-2 rounded-md transition-all duration-300;
+  }
+  
+  .btn-primary:hover {
+    background-color: #008F8A;
+    @apply transform -translate-y-0.5;
   }
   
   .btn-secondary {
-    @apply bg-white hover:bg-gray-100 text-red-600 border border-red-600 px-4 py-2 rounded-md transition-colors;
+    @apply bg-white hover:bg-gray-100 border border-current px-4 py-2 rounded-md transition-all duration-300;
+    color: var(--primary-color);
+  }
+
+  .btn-secondary:hover {
+    @apply transform -translate-y-0.5;
+  }
+
+  /* Navigation Styles */
+  .nav-link {
+    @apply relative transition-colors duration-300;
+  }
+
+  .nav-link:hover {
+    color: var(--primary-color);
+  }
+
+  .nav-link.active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5;
+    background-color: var(--primary-color);
+  }
+
+  /* Card Hover Effects */
+  .property-card {
+    @apply transition-all duration-300;
+  }
+
+  .property-card:hover {
+    @apply transform -translate-y-2 shadow-xl;
+  }
+
+  .service-card {
+    @apply transition-all duration-300;
+  }
+
+  .service-card:hover {
+    @apply transform -translate-y-1 shadow-lg;
+  }
+
+  /* Trust Indicators Animation */
+  .trust-indicator {
+    @apply transition-all duration-300;
+  }
+
+  .trust-indicator:hover {
+    @apply transform scale-105;
+  }
+
+  /* Search Widget Styling */
+  .search-widget {
+    @apply bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-xl;
+  }
+
+  .search-field select:focus,
+  .search-field input:focus {
+    @apply outline-none ring-2;
+    ring-color: var(--primary-color);
+  }
+
+  /* Footer Styling */
+  .footer {
+    background-color: var(--secondary-color);
+  }
+
+  /* Utility Classes */
+  .text-primary {
+    color: var(--primary-color);
+  }
+
+  .text-secondary {
+    color: var(--secondary-color);
+  }
+
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
+
+  .bg-secondary {
+    background-color: var(--secondary-color);
+  }
+
+  .bg-light {
+    background-color: var(--background-light);
+  }
+
+  .border-primary {
+    border-color: var(--primary-color);
+  }
+
+  /* Loading Animation */
+  .loading {
+    @apply inline-block w-5 h-5 border-2 border-gray-300 border-t-current rounded-full animate-spin;
+  }
+
+  /* Smooth Animations */
+  .fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive Grid Utilities */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #008F8A;
+}
+
+/* Focus Styles for Accessibility */
+*:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+  
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-color: #000000;
+    --text-dark: #000000;
+    --background-white: #FFFFFF;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
