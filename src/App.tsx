@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Building, Search, MapPin, Bed, Bath, Square, Phone, MessageCircle, ChevronUp, Menu, X, User, Heart, Home, Info, Briefcase, Mail, ArrowRight, ChevronDown, Star, Award, Shield, Clock, TrendingUp, Users, CheckCircle } from 'lucide-react';
+import { Building, Search, MapPin, Bed, Bath, Square, Phone, MessageCircle, ChevronUp, Menu, X, User, Heart, Home, Info, Briefcase, Mail, ArrowRight, ChevronDown, Star, Award, Shield, Clock, TrendingUp, Users, CheckCircle, Filter, Grid, List, Eye, Calendar, Download, Share2 } from 'lucide-react';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState('buy');
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  const [viewMode, setViewMode] = useState('grid');
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [selectedType, setSelectedType] = useState('');
+  const [priceRange, setPriceRange] = useState([0, 5000000]);
   const [counters, setCounters] = useState({
     experience: 0,
     clients: 0,
@@ -18,6 +23,17 @@ function App() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       setShowBackToTop(window.scrollY > 300);
+      
+      // Animate elements on scroll
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('animate-fade-in');
+        }
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -119,6 +135,23 @@ function App() {
     });
   };
 
+  // Filter properties function
+  const filterProperties = (location, type, price) => {
+    return properties.filter(property => {
+      const matchesLocation = !location || property.location.includes(location);
+      const matchesType = !type || property.type.includes(type);
+      const priceValue = parseInt(property.price.replace(/[^0-9]/g, ''));
+      const matchesPrice = priceValue <= price;
+      return matchesLocation && matchesType && matchesPrice;
+    });
+  };
+
+  // Handle property search
+  const handleSearch = () => {
+    const filteredResults = filterProperties(selectedLocation, selectedType, priceRange[1]);
+    console.log('Search results:', filteredResults);
+    // In a real app, this would update the properties display
+  };
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -166,7 +199,7 @@ function App() {
             </nav>
 
             {/* Right side buttons */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               <a href="#" className="text-black hover:text-teal-600 flex items-center">
                 <User className="h-5 w-5 mr-1" />
                 <span>Sign Up/Login</span>
@@ -177,7 +210,7 @@ function App() {
             </div>
 
             {/* Mobile menu button */}
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <button 
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-black focus:outline-none"
@@ -190,7 +223,7 @@ function App() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white shadow-lg">
+          <div className="lg:hidden bg-white shadow-lg border-t">
             <div className="px-4 py-2 space-y-1">
               <a href="#" className="block py-2 text-black hover:text-teal-600">Buy</a>
               <a href="#" className="block py-2 text-black hover:text-teal-600">Rent</a>
@@ -206,7 +239,7 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-24 md:pt-0 h-screen">
+      <section className="relative pt-20 lg:pt-0 min-h-screen flex items-center">
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.pexels.com/photos/2506988/pexels-photo-2506988.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080" 
@@ -298,7 +331,7 @@ function App() {
       </section>
 
       {/* Trust Indicators Section */}
-      <section className="py-12 bg-gray-100">
+      <section className="py-16 bg-gray-100 animate-on-scroll">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Jiya Properties</h2>
@@ -345,30 +378,66 @@ function App() {
       </section>
 
       {/* Featured Properties Section */}
-      <section className="py-16">
+      <section className="py-16 animate-on-scroll">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Properties</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Discover our handpicked selection of premium properties in Dubai's most prestigious locations</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Property Controls */}
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className="lg:hidden flex items-center px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              >
+                <Filter className="h-4 w-4 mr-2" />
+                Filters
+              </button>
+              <span className="text-gray-600">{properties.length} Properties Found</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`p-2 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+              >
+                <Grid className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => setViewMode('list')}
+                className={`p-2 rounded-md transition-colors ${viewMode === 'list' ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+              >
+                <List className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+          
+          <div className={`grid gap-8 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
             {properties.map(property => (
-              <div key={property.id} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:-translate-y-2">
+              <div key={property.id} className={`bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${viewMode === 'list' ? 'flex flex-col sm:flex-row' : ''}`}>
                 <div className="relative">
-                  <img src={property.image} alt={property.title} className="w-full h-64 object-cover" />
+                  <img src={property.image} alt={property.title} className={`object-cover ${viewMode === 'list' ? 'w-full sm:w-80 h-48 sm:h-full' : 'w-full h-64'}`} />
                   <div className="absolute top-4 right-4 bg-teal-600 text-white px-3 py-1 rounded-md text-sm font-medium">
                     {property.status}
                   </div>
+                  <div className="absolute top-4 left-4 flex space-x-2">
+                    <button className="bg-white bg-opacity-90 p-2 rounded-full hover:bg-opacity-100 transition-all">
+                      <Heart className="h-4 w-4 text-gray-600 hover:text-red-500" />
+                    </button>
+                    <button className="bg-white bg-opacity-90 p-2 rounded-full hover:bg-opacity-100 transition-all">
+                      <Share2 className="h-4 w-4 text-gray-600 hover:text-teal-600" />
+                    </button>
+                  </div>
                 </div>
-                <div className="p-6">
+                <div className={`p-6 ${viewMode === 'list' ? 'flex-1' : ''}`}>
                   <h3 className="text-teal-600 text-2xl font-bold mb-2">{property.price}</h3>
                   <h4 className="text-black text-xl font-semibold mb-2">{property.title}</h4>
                   <p className="text-gray-600 mb-4 flex items-center">
                     <MapPin className="h-4 w-4 mr-1" />
                     {property.location}
                   </p>
-                  <div className="flex justify-between mb-4">
+                  <div className={`flex ${viewMode === 'list' ? 'flex-wrap gap-4' : 'justify-between'} mb-4`}>
                     <span className="flex items-center text-gray-600">
                       <Bed className="h-4 w-4 mr-1" />
                       {property.bedrooms} Beds
@@ -386,7 +455,11 @@ function App() {
                     <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
                     <span className="text-gray-600 text-sm">John Smith</span>
                   </div>
-                  <div className="flex space-x-2">
+                  <div className={`flex ${viewMode === 'list' ? 'flex-wrap gap-2' : 'space-x-2'}`}>
+                    <button className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded-md flex items-center justify-center transition-colors">
+                      <Eye className="h-4 w-4 mr-1" />
+                      View
+                    </button>
                     <button className="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-md flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -412,7 +485,7 @@ function App() {
       </section>
 
       {/* Services Section */}
-      <section className="py-16 bg-gray-100">
+      <section className="py-16 bg-gray-100 animate-on-scroll">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
@@ -420,7 +493,7 @@ function App() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mb-4">
                 <Home className="h-8 w-8 text-white" />
               </div>
@@ -431,7 +504,7 @@ function App() {
               </a>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mb-4">
                 <MapPin className="h-8 w-8 text-white" />
               </div>
@@ -442,7 +515,7 @@ function App() {
               </a>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mb-4">
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
@@ -453,7 +526,7 @@ function App() {
               </a>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mb-4">
                 <Briefcase className="h-8 w-8 text-white" />
               </div>
@@ -468,7 +541,7 @@ function App() {
       </section>
 
       {/* Market Insights Section */}
-      <section className="py-16">
+      <section className="py-16 animate-on-scroll">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Dubai Market Insights</h2>
@@ -476,7 +549,7 @@ function App() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
                   <TrendingUp className="h-6 w-6 text-green-600" />
@@ -489,7 +562,7 @@ function App() {
               <p className="text-gray-600">Dubai's property market continues to show strong growth with increasing demand from international investors and residents.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                   <Building className="h-6 w-6 text-blue-600" />
@@ -502,7 +575,7 @@ function App() {
               <p className="text-gray-600">Exciting new developments launching across Dubai, offering modern amenities and prime locations for investors.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mr-4">
                   <Star className="h-6 w-6 text-teal-600" />
@@ -519,7 +592,7 @@ function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 bg-gray-100">
+      <section className="py-16 bg-gray-100 animate-on-scroll">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
@@ -527,7 +600,7 @@ function App() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="flex items-center mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
@@ -543,7 +616,7 @@ function App() {
               </div>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="flex items-center mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
@@ -559,7 +632,7 @@ function App() {
               </div>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="flex items-center mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
@@ -695,7 +768,7 @@ function App() {
       {/* WhatsApp Floating Button */}
       <a 
         href="#" 
-        className="fixed bottom-24 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors"
+        className="fixed bottom-24 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -706,7 +779,7 @@ function App() {
       {showBackToTop && (
         <button 
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 bg-teal-600 text-white p-3 rounded-full shadow-lg hover:bg-teal-700 transition-colors"
+          className="fixed bottom-6 right-6 z-50 bg-teal-600 text-white p-3 rounded-full shadow-lg hover:bg-teal-700 transition-all duration-300 hover:scale-110"
         >
           <ChevronUp className="h-6 w-6" />
         </button>

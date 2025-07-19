@@ -178,6 +178,20 @@
     animation: slideUp 0.6s ease-out;
   }
 
+  .animate-fade-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+
+  .animate-on-scroll.animate-fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -198,11 +212,68 @@
     }
   }
 
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   /* Responsive Grid Utilities */
   .grid-auto-fit {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
+  /* Mobile Touch Improvements */
+  @media (max-width: 768px) {
+    .btn-primary,
+    .btn-secondary {
+      @apply min-h-[44px] text-base;
+    }
+    
+    .property-card {
+      @apply mx-2;
+    }
+    
+    .search-widget {
+      @apply mx-4;
+    }
+  }
+
+  /* Skeleton Loading */
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Enhanced Hover Effects */
+  .hover-lift {
+    transition: all 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Focus Improvements */
+  .focus-ring:focus {
+    @apply outline-none ring-2 ring-offset-2;
+    ring-color: var(--primary-color);
+  }
   .grid-auto-fill {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
@@ -230,6 +301,32 @@
 *:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
+}
+
+/* Improved Button Focus */
+button:focus,
+a:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .hover\:scale-105:hover {
+    transform: none;
+  }
+  
+  .hover\:-translate-y-2:hover {
+    transform: none;
+  }
+  
+  /* Larger touch targets */
+  button,
+  a,
+  input,
+  select {
+    min-height: 44px;
+  }
 }
 
 /* Print Styles */
@@ -263,5 +360,10 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
   }
 }
