@@ -4,14 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        teal: {
-          500: '#00A19C', // Primary color
-          600: '#008F8A', // Darker shade for hover
+        red: {
+          500: '#EF4444', // Standard red
+          600: '#DC2626', // Primary red
+          700: '#B91C1C', // Darker red for hover
         },
-        navy: {
-          500: '#1A2B4C', // Secondary color
-          600: '#152340', // Darker shade for hover
-        }
+        black: '#000000',
+        white: '#FFFFFF',
       },
       fontFamily: {
         sans: ['Poppins', 'Inter', 'sans-serif'],
